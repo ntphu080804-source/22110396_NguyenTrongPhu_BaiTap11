@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách sản phẩm</title>
+</head>
+<body>
+<h2>Danh sách sản phẩm</h2>
+
+<p sec:authorize="isAuthenticated()">Xin chào, <b sec:authentication="name"></b>! 
+<a th:href="@{/logout}">Đăng xuất</a></p>
+
+<p sec:authorize="hasRole('ADMIN')">
+    <a th:href="@{/new}">➕ Thêm sản phẩm</a>
+</p>
+
+<table border="1">
+    <tr><th>ID</th><th>Tên sản phẩm</th><th>Giá</th><th>Hành động</th></tr>
+    <tr th:each="p : ${listProducts}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.name}"></td>
+        <td th:text="${p.price}"></td>
+        <td>
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{'/edit/' + ${p.id}}">Sửa</a> |
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{'/delete/' + ${p.id}}">Xóa</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

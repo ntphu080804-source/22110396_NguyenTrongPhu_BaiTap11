@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Thêm sản phẩm</title></head>
+<body>
+<h2>Thêm sản phẩm</h2>
+<form th:action="@{/save}" th:object="${product}" method="post">
+    Tên: <input type="text" th:field="*{name}"/><br/>
+    Giá: <input type="number" th:field="*{price}"/><br/>
+    <button type="submit">Lưu</button>
+</form>
+<a th:href="@{/}">⬅ Quay lại</a>
+</body>
+</html>
